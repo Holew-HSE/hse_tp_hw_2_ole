@@ -1,0 +1,111 @@
+
+name: oleg
+
+on:
+  push:
+    branches: "*"
+
+
+  workflow_dispatch:
+
+jobs:
+  test_min:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          cd $GITHUB_WORKSPACE
+          pip install pytest
+          python -m pytest test_min.py
+        if: ${{ always() }}
+      - name: Tg_send_tests_main
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Тест min:
+            ${{ job.status }}
+  test_max:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          cd $GITHUB_WORKSPACE
+          pip install pytest
+          python -m pytest test_max.py
+        if: ${{ always() }}
+      - name: Tg_send_tests_main
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Тест max:
+            ${{ job.status }}
+  test_sum:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          cd $GITHUB_WORKSPACE
+          pip install pytest
+          python -m pytest test_sum.py
+        if: ${{ always() }}
+      - name: Tg_send_tests_main
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Тест sum:
+            ${{ job.status }}
+  test_mult:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          cd $GITHUB_WORKSPACE
+          pip install pytest
+          python -m pytest test_mult.py    
+        if: ${{ always() }}
+      - name: Tg_send_tests_main
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Тест mult:
+            ${{ job.status }}
+  test_dop:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          cd $GITHUB_WORKSPACE
+          pip install pytest
+          python -m pytest test_dop.py  
+        if: ${{ always() }}
+      - name: Tg_send_tests_main
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Тест dop:
+            ${{ job.status }}
