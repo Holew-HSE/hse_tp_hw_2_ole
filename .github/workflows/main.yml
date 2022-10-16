@@ -27,8 +27,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Тест min:
-            ${{ job.status }}
+            Тест min: ${{ job.status }}
   test_max:
     runs-on: ubuntu-latest
 
@@ -47,8 +46,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Тест max:
-            ${{ job.status }}
+            Тест max: ${{ job.status }}
   test_sum:
     runs-on: ubuntu-latest
 
@@ -67,8 +65,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Тест sum:
-            ${{ job.status }}
+            Тест sum: ${{ job.status }}
   test_mult:
     runs-on: ubuntu-latest
 
@@ -87,8 +84,7 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Тест mult:
-            ${{ job.status }}
+            Тест mult:  ${{ job.status }}
   test_dop:
     runs-on: ubuntu-latest
 
@@ -107,5 +103,23 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            Тест dop:
-            ${{ job.status }}
+            Тест dop: ${{ job.status }}
+  test_time:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          cd $GITHUB_WORKSPACE
+          pip install pytest
+          python -m pytest main_test__time.py
+        if: ${{ always() }}
+      - name: Tg_send_tests_main
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Тест время: ${{ job.status }}
